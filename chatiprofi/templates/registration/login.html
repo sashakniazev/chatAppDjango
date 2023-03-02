@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Log In{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css"/>
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+
+        <form class="form-signin" method="post">
+            {% csrf_token %}
+
+            <h2 class="form-signin-heading">Войдите в систему</h2>
+
+            <br>
+
+            {% if form.errors %}
+                <div class="span3 alert alert-danger">
+                    <h4>Error!</h4>
+                    Пожалуйста, введите правильное имя пользователя и пароль. Поля
+                    чувствительны к регистру.
+                </div>
+            {% endif %}
+
+            <label for="username" class="sr-only">Логин</label>
+            <input type="text" id="username" class="form-control"
+                   name="username" placeholder="Username"
+                   value="{{ form.username.value|default_if_none:"" }}"
+                   required autofocus>
+
+            <label for="password" class="sr-only">Пароль</label>
+            <input type="password" id="password" class="form-control"
+                   name="password" placeholder="Password" required>
+
+            <br>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                Авторизоваться
+            </button>
+
+        </form>
+
+    </div> <!-- /container -->
+{% endblock %}
